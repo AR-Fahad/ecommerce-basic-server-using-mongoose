@@ -26,7 +26,7 @@ app.all('*', (req: Request, res: Response) => {
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   if (error) {
     console.log(error);
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       message: 'Something went wrong!',
       error,
