@@ -40,7 +40,7 @@ const createOrder = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Product is not exists',
+      message: 'Ordered product is not exists',
       error: err,
     });
   }
@@ -51,11 +51,18 @@ const getOrders = async (req: Request, res: Response) => {
     const { email } = req.query;
     const result = await getOrdersFromDb(email as string);
     if (email) {
-      res.status(200).send({
-        success: true,
-        message: 'Orders fetched successfully for user email!',
-        data: result,
-      });
+      if (result.length === 0) {
+        res.status(200).send({
+          success: false,
+          message: 'Order not found',
+        });
+      } else {
+        res.status(200).send({
+          success: true,
+          message: 'Orders fetched successfully for user email!',
+          data: result,
+        });
+      }
     } else {
       res.status(200).send({
         success: true,
