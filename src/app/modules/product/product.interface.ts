@@ -1,6 +1,4 @@
-export type TTags = string[]; // Also can use Array<string> instead of string[]
-
-export type TVariants = Array<{ type: string; value: string }>;
+export type TVariants = { type: string; value: string };
 
 export type TInventory = {
   quantity: number;
@@ -13,7 +11,7 @@ export type TProduct = {
   description: string;
   price: number;
   category: string;
-  tags: TTags;
-  variants: TVariants;
+  tags: string[];
+  variants: Array<TVariants>;
   inventory: TInventory;
 };
