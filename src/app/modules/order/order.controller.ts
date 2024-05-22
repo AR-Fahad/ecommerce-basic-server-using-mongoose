@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { orderServices } from './order.service';
 import { productServices } from '../product/product.service';
+import { TOrder } from './order.interface';
 
 const { getSingleProductFromDb, updateSingleProductIntoDb } = productServices;
 
@@ -8,7 +9,7 @@ const { createOrderIntoDb, getOrdersFromDb } = orderServices;
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const order = req.body;
+    const order: TOrder = req.body;
     const isExist: any = await getSingleProductFromDb(order.productId);
     if (isExist?.inventory?.quantity >= order.quantity) {
       const remains: number = isExist?.inventory?.quantity - order.quantity;
