@@ -25,9 +25,8 @@ app.all('*', (req: Request, res: Response) => {
 });
 
 // global error handling
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+app.use((error: any, req: Request, res: Response) => {
   if (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       message: 'Something went wrong!',
